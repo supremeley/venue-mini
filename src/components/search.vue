@@ -3,7 +3,7 @@
     <!-- <view class="location-container" @click="showPopup">
       <image :src="icon.location" class="location-icon" />
       <text>{{area.name}}</text>
-    </view> -->
+    </view>-->
     <view class="search-container" @click="handleClick">
       <image :src="icon.search" class="search-icon" />
       <input
@@ -140,6 +140,8 @@ wepy.component({
 
   height: 60rpx;
   padding: 20rpx 30rpx;
+
+  background: #fff;
 }
 .location {
   &-container {

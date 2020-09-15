@@ -5,14 +5,14 @@
       <view v-for="item in 10" :key="item" class="list-item" @click="linkDetail(item.id)">
         <view class="list-item-header">
           <view class="list-item-header__info">
-            <image :src="icon.minePhone" class="list-item-header__info-icon" />
+            <image :src="icon.title" class="list-item-header__info-icon" />
             <text class="list-item-header__info-text">小鹿人篮球馆</text>
             <van-icon name="arrow" />
           </view>
           <text class="list-item-header__status">已签到</text>
         </view>
         <view class="list-item-content">
-          <image :src="icon.minePhone" class="list-item-content__img" />
+          <image :src="icon.bg" class="list-item-content__img" />
           <view class="list-item-content__info">
             <view class="list-item-content__info-title">小鹿人1号场</view>
             <view class="list-item-content__info-date">2018-07-19</view>
@@ -47,9 +47,8 @@ wepy.page({
     isLoading: true,
     list: [],
     icon: {
-      avatar: '/static/images/avatar.png',
-      mineBg: '/static/images/mine_ball.png',
-      minePhone: '/static/images/register_bg.png',
+      title: '/static/images/title_icon.png',
+      bg: '/static/images/bg.png',
     },
   },
   methods: {

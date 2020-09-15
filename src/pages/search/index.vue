@@ -1,20 +1,24 @@
 
 <template>
   <view>
-    <search @search="search"></search>
-    <view class="history">
-      <view class="history-title">
-        <text>历史搜索</text>
-        <image :src="icon.delete" mode="aspectFill" class="history-title__icon" />
-      </view>
-      <view class="history-list">
-        <view v-for="item in 10" :key="item" class="history-list-item">浦江镇</view>
+    <view class="header">
+      <search @search="search"></search>
+      <view class="history">
+        <view class="history-title">
+          <text>历史搜索</text>
+          <image :src="icon.delete" mode="aspectFill" class="history-title__icon" />
+        </view>
+        <view class="history-list">
+          <view v-for="item in 10" :key="item" class="history-list-item">浦江镇</view>
+        </view>
       </view>
     </view>
+
     <view class="section">
-      <scroll-view scroll-y class="content">
-        <venue-list v-for="item in 10" :key="item" :item="item"></venue-list>
-      </scroll-view>
+      <view class="content">
+        <venue-list v-for="item in 10" :key="item" :item="item" @link="link"></venue-list>
+      </view>
+
       <loading v-if="isLoading"></loading>
       <default v-if="!isLoading && !list.length"></default>
     </view>
@@ -51,8 +55,8 @@ wepy.page({
     },
   },
   methods: {
-    jumpToCourse(id) {
-      this.linkPage(`/pages/course/detail`, { id });
+    link() {
+      this.linkPage('/pages/venue/index');
     },
     async fetchList(searchStr) {
       // this.isLoading = true;
@@ -101,6 +105,13 @@ wepy.page({
 page {
   background: #fff;
 }
+.header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+
+  background: #fff;
+}
 .history {
   margin-top: 20rpx;
   padding: 0 30rpx;
@@ -141,8 +152,8 @@ page {
   margin-top: 2rpx;
 }
 .content {
-  box-sizing: border-box;
-  height: calc(100vh - 102rpx);
+  // box-sizing: border-box;
+  // height: calc(100vh - 102rpx);
   padding: 0 30rpx;
 }
 

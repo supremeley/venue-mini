@@ -3,13 +3,13 @@
   <view>
     <view class="header">
       <view class="header__info">
-        <image :src="icon.minePhone" class="header__info-icon" />
+        <image :src="icon.title" mode="aspectFill" class="header__info-icon" />
         <text class="header__info-text">小鹿人篮球馆</text>
       </view>
       <text class="header__status">已签到</text>
     </view>
     <view class="content">
-      <image :src="icon.minePhone" class="content__img" />
+      <image :src="icon.bg" class="content__img" />
       <view class="content__info">
         <view class="content__info-title">小鹿人1号场</view>
         <view class="content__info-date">2018-07-19</view>
@@ -39,7 +39,7 @@
         <view>入场时间</view>
       </view>
     </view>
-    <button open-type="share" class="btn">再次预定</button>
+    <button class="btn">再次预定</button>
   </view>
 </template>
 
@@ -51,9 +51,8 @@ wepy.page({
   data: {
     list: [],
     icon: {
-      avatar: '/static/images/avatar.png',
-      mineBg: '/static/images/mine_ball.png',
-      minePhone: '/static/images/register_bg.png',
+      title: '/static/images/title_icon.png',
+      bg: '/static/images/bg.png',
     },
   },
   methods: {

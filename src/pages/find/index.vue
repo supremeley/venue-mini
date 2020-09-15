@@ -2,21 +2,24 @@
 <template>
   <view>
     <!-- <search @link="jumpToSearch"></search> -->
-    <view class="title">
-      <van-dropdown-menu active-color="#fe7115" class="title">
-        <van-dropdown-item title="位置区域" :value="value1" :options="option1" @change="changeA" />
-        <van-dropdown-item
-          title="教学场馆"
-          :value="value2"
-          :options="option2"
-          :disabled="!option2.length"
-          @change="changeB"
-        />
-        <van-dropdown-item title="时间排序" :value="value3" :options="option3" @change="changeC" />
-      </van-dropdown-menu>
+    <view class="header">
+      <view class="title">
+        <van-dropdown-menu active-color="#fe7115" class="title">
+          <van-dropdown-item title="位置区域" :value="value1" :options="option1" @change="changeA" />
+          <van-dropdown-item
+            title="教学场馆"
+            :value="value2"
+            :options="option2"
+            :disabled="!option2.length"
+            @change="changeB"
+          />
+          <van-dropdown-item title="时间排序" :value="value3" :options="option3" @change="changeC" />
+        </van-dropdown-menu>
+      </view>
     </view>
+
     <view class="plate">
-      <venue-list v-for="item in 10" :key="item" :item="item"></venue-list>
+      <venue-list v-for="item in 10" :key="item" :item="item" @link="link"></venue-list>
       <loading v-if="isLoading"></loading>
       <default v-if="!isLoading && !list.length"></default>
     </view>
@@ -71,8 +74,8 @@ wepy.page({
     jumpToSearch() {
       this.linkPage(`/pages/search/index`);
     },
-    jumpToCourse(id) {
-      this.linkPage(`/pages/course/detail`, { id });
+    link() {
+      this.linkPage('/pages/venue/index');
     },
     changeA(e) {
       this.value1 = e.$wx.detail;
@@ -165,6 +168,11 @@ wepy.page({
 <style lang="scss" scoped>
 page {
   background: #fff;
+}
+.header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
 }
 .van-dropdown-menu {
   height: 100% !important;

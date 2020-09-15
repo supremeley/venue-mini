@@ -1,7 +1,7 @@
 <template>
-  <view class="list-item" @click="link('venue', 1)">
+  <view class="list-item" @click="link(1)">
     <view class="score_num">人气4.5</view>
-    <image :src="icon.locationGray" mode="aspectFill" class="list-item__img" />
+    <image :src="icon.bg" mode="aspectFill" class="list-item__img" />
     <view class="list-item__title">
       <text class="list-item__title-left">浦江镇第一球场</text>
       <text class="list-item__title-right">可包场</text>
@@ -22,18 +22,17 @@ import wepy from '@wepy/core';
 wepy.component({
   props: {
     item: {
-      locationGray: '/static/images/location_gray.png',
+      bg: '/static/images/bg.png',
     },
   },
   data: {
     icon: {
-      locationGray: '/static/images/location_gray.png',
+      bg: '/static/images/bg.png',
     },
   },
   methods: {
-    link(type, id) {
-      let url = `/pages/${ype}/detail`;
-      this.linkPage(url, { id });
+    link(id) {
+      this.$emit('link',id)
     },
   },
 });

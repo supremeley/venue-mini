@@ -1,18 +1,20 @@
 <template>
   <view class="wrap">
-    <search @link="jumpToSearch"></search>
+    <view class="header">
+      <search @link="jumpToSearch"></search>
+    </view>
     <view class="quick">
-      <image :src="icon.locationGray" mode="aspectFill" class="quick__img" />
+      <image :src="icon.bg" mode="aspectFill" class="quick__img" />
       <view class="quick-content">
         <view class="quick-content-item">
           <text class="quick-content-item__text">日期</text>
           <text class="quick-content-item__date">2020-06-27</text>
-          <image :src="icon.locationGray" mode="aspectFill" class="quick-content-item__icon" />
+          <image :src="icon.date" mode="aspectFill" class="quick-content-item__icon" />
         </view>
         <view class="quick-content-item">
           <text class="quick-content-item__text">时间</text>
           <text class="quick-content-item__date">18:00</text>
-          <image :src="icon.locationGray" mode="aspectFill" class="quick-content-item__icon" />
+          <image :src="icon.time" mode="aspectFill" class="quick-content-item__icon" />
         </view>
         <button class="quick-content-btn">快速选馆</button>
       </view>
@@ -20,13 +22,13 @@
     <view class="plate">
       <view class="plate-header">
         <text class="plate-header__title">附近场馆</text>
-        <view class="plate-header__more" @click="switchTab('action')">
+        <view class="plate-header__more" @click="switchTab('find')">
           <text>查看更多</text>
           <van-icon name="arrow" />
         </view>
       </view>
       <view class="plate-content">
-        <venue-list v-for="item in 10" :key="item" :item="item"></venue-list>
+        <venue-list v-for="item in 10" :key="item" :item="item" @link="link"></venue-list>
       </view>
       <loading v-if="isLoading"></loading>
     </view>
@@ -48,7 +50,9 @@ wepy.page({
     list: [],
     loc: {},
     icon: {
-      locationGray: '/static/images/location_gray.png',
+      date: '/static/images/date_icon.png',
+      time: '/static/images/time_icon.png',
+      bg: '/static/images/bg.png',
     },
   },
   computed: {
@@ -67,6 +71,9 @@ wepy.page({
     // },
     jumpToSearch() {
       this.linkPage(`/pages/search/index`);
+    },
+    link() {
+      this.linkPage('/pages/venue/index');
     },
     switchTab(url) {
       wx.switchTab({ url: `/pages/${url}/index` });
@@ -144,6 +151,11 @@ page {
 }
 .wrap {
   padding-bottom: 30rpx;
+}
+.header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
 }
 .swiper {
   box-sizing: border-box;

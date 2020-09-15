@@ -20,7 +20,7 @@ wepy.mixin(mixins);
 
 wepy.app({
   onLaunch() {
-    lu.login();
+    // lu.login();
   },
 });
 </script>
@@ -28,7 +28,6 @@ wepy.app({
 <config>
 {
   pages: [
-    'pages/venue/index',
     
     'pages/home/index',
     'pages/find/index',
@@ -37,6 +36,8 @@ wepy.app({
     'pages/mine/detail',
     'pages/order/index',
     'pages/order/detail',
+    'pages/venue/index',
+    'pages/field/index',
     
 
     'pages/login/index',

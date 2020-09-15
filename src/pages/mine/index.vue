@@ -91,12 +91,12 @@ wepy.page({
       {
         icon: '/static/images/mine_member.png',
         title: '我的会员',
-        url: '/pages/record/course/index',
+        url: '/pages/mine/detail',
       },
       {
         icon: '/static/images/mine_book.png',
         title: '我的预定',
-        url: '/pages/record/vacation/index',
+        url: '/pages/order/index',
       },
       {
         icon: '/static/images/mine_collect.png',
