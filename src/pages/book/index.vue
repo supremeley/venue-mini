@@ -1,110 +1,23 @@
 
 <template>
   <view class="wrap">
-    <image :src="icon.registerBg" class="bg" />
-    <view class="content">
-      <view class="content-header">大班外教篮球课</view>
-      <view class="content-form">
-        <view class="content-form-item">
-          <view class="content-form-item__title">姓名</view>
-          <view class="content-form-item__content">
-            <input
-              v-model="form.customerName"
-              type="text"
-              placeholder="请输入姓名"
-              placeholderClass="placeholder"
-              class="content-form-item__content-inp"
-            />
-          </view>
-        </view>
-        <view class="content-form-item">
-          <view class="content-form-item__title">年龄</view>
-          <view class="content-form-item__content">
-            <input
-              v-model="form.customerAge"
-              type="number"
-              placeholder="请输入年龄"
-              placeholderClass="placeholder"
-              class="content-form-item__content-inp"
-            />
-          </view>
-        </view>
-        <view class="content-form-item">
-          <view class="content-form-item__title">有无基础</view>
-          <view class="content-form-item__content">
-            <view
-              v-for="item in selectOption"
-              :key="item.name"
-              class="content-form-item__content-radio"
-              @click="select('select', item.name)"
-            >
-              <view
-                :class="{'in-circle': item.name === form.basis}"
-                class="content-form-item__content-radio-circle"
-              ></view>
-              <text class="content-form-item__content-radio-text">{{item.name}}</text>
-            </view>
-          </view>
-        </view>
-        <view class="content-form-item">
-          <view class="content-form-item__title">您觉得孩子的体质如何</view>
-          <view class="content-form-item__content">
-            <view
-              v-for="item in baiseOption"
-              :key="item.name"
-              class="content-form-item__content-radio"
-              @click="select('baise', item.name)"
-            >
-              <view
-                :class="{'in-circle': item.name === form.physique}"
-                class="content-form-item__content-radio-circle"
-              ></view>
-              <text class="content-form-item__content-radio-text">{{item.name}}</text>
-            </view>
-          </view>
-        </view>
-        <view class="content-form-item">
-          <view class="content-form-item__title">手机号</view>
-          <view class="content-form-item__content">
-            <input
-              v-model="form.phone"
-              type="number"
-              placeholder="请输入您的手机号"
-              placeholderClass="placeholder"
-              class="content-form-item__content-inp"
-            />
-            <view class="content-form-item__content-code">
-              <text v-if="!showTimer" @click="getSms">获取验证码</text>
-              <text v-else>{{timeNum}}s</text>
-            </view>
-          </view>
-        </view>
-        <view class="content-form-item">
-          <view class="content-form-item__title">验证码</view>
-          <view class="content-form-item__content">
-            <input
-              v-model="form.smsCode"
-              type="text"
-              placeholder="请输入验证码"
-              placeholderClass="placeholder"
-              class="content-form-item__content-inp"
-            />
-          </view>
-        </view>
-        <view class="content-form-item">
-          <view class="content-form-item__title">推广码</view>
-          <view class="content-form-item__content">
-            <input
-              v-model="form.spreadCode"
-              type="text"
-              placeholder="请输入推广码"
-              placeholderClass="placeholder"
-              class="content-form-item__content-inp"
-            />
-          </view>
+    <view class="header">
+      <view class="header__info">
+        <image :src="icon.title" mode="aspectFit" class="header__info-icon" />
+        <text class="header__info-text">小鹿人篮球馆</text>
+      </view>
+    </view>
+    <view class="section">
+      <image :src="icon.bg" mode="aspectFill" class="section__img" />
+      <view class="section__info">
+        <view class="section__info-title">小鹿人一号场地</view>
+        <view class="section__info-desc">靠近门口</view>
+        <view class="section__info-price">
+          ￥300/
+          <text class="section__info-price-t">小时</text>
         </view>
       </view>
-      <button class="btn" @click="submit">提交</button>
+      <van-icon name="arrow" class="arrow"></van-icon>
     </view>
   </view>
 </template>
@@ -116,68 +29,12 @@ import api from '@/api/index';
 wepy.page({
   hooks: {},
   data: {
-    showTimer: false,
-    timer: null,
-    timeNum: 60,
-    form: {
-      basis: '无基础',
-      customerName: '',
-      customerAge: '',
-      phone: '',
-      physique: '良好',
-      spreadCode: '',
-      smsCode: '',
-    },
     icon: {
-      registerBg: '/static/images/register_bg.png',
+      title: '/static/images/title_icon.png',
+      bg: '/static/images/bg.png',
     },
-    selectOption: [
-      {
-        name: '无基础',
-        type: 'n',
-      },
-      {
-        name: '有基础',
-        type: 'y',
-      },
-    ],
-    baiseOption: [
-      {
-        name: '良好',
-        type: 'a',
-      },
-      {
-        name: '一般',
-        type: 'b',
-      },
-      {
-        name: '较差',
-        type: 'c',
-      },
-    ],
   },
   methods: {
-    countDown() {
-      this.showTimer = true;
-
-      this.timer = setInterval(() => {
-        if (this.timeNum == 0) {
-          clearInterval(this.timer);
-          this.showTimer = false;
-          this.timeNum = 60;
-        }
-        this.timeNum--;
-      }, 1000);
-    },
-    select(type, status) {
-      if (type == 'select') {
-        this.form.basis = status;
-      }
-
-      if (type == 'baise') {
-        this.form.physique = status;
-      }
-    },
     verify() {
       let msg;
       if (!this.form.smsCode) msg = '请填写验证码';
@@ -189,29 +46,6 @@ wepy.page({
         this.toast(msg);
       } else {
         return true;
-      }
-    },
-    async getSms() {
-      let msg;
-      if (!this.form.phone) msg = '请填写手机号';
-
-      if (msg) {
-        this.toast(msg);
-        return true;
-      }
-
-      const data = {
-        mobile: this.form.phone,
-      };
-
-      const res = await api.GET_SMS(data);
-
-      if (res.data.code === 200) {
-        this.countDown();
-        // this.toast(res.data.msg, 'success', 5000);
-        this.toast(res.data.msg, 'none', 5000);
-      } else {
-        this.toast(res.data.msg, 'fail');
       }
     },
     async submit() {
@@ -239,120 +73,96 @@ wepy.page({
 </script>
 
 <style lang="scss" scoped>
-page {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100rpx;
+  padding: 0 30rpx;
+
+  border-top: 2rpx solid #ededed;
   background: #fff;
-}
-.wrap {
-  padding-bottom: 36rpx;
-}
-.bg {
-  width: 100%;
-  height: 520rpx;
-}
-.content {
-  margin: 0 30rpx;
-  padding: 55rpx 30rpx;
+  &__info {
+    display: flex;
+    align-items: center;
 
-  transform: translate(0, -30rpx);
-
-  border-radius: 10rpx;
-  background: #fff;
-  box-shadow: 0 5rpx 10rpx rgba(0, 0, 0, .1);
-  &-header {
-    font-size: 36rpx;
-    font-weight: 600;
-
-    margin-bottom: 20rpx;
-  }
-}
-.content-form {
-  margin-bottom: 50rpx;
-  &-item {
-    border-bottom: 2rpx solid #ededed;
-    &__title {
+    color: #ccc;
+    &-icon {
+      width: 40rpx;
+      height: 40rpx;
+      margin-right: 10rpx;
+    }
+    &-text {
       font-size: 34rpx;
-      line-height: 86rpx;
-    }
-    &__content {
-      display: flex;
-      align-items: center;
+      font-weight: 600;
 
-      height: 86rpx;
-      &-inp {
-        flex: 1;
-      }
-      &-code {
-        font-size: 30rpx;
-
-        flex-basis: 200rpx;
-
-        text-align: center;
-
-        color: #fe7115;
-        border-left: 2rpx solid #ededed;
-      }
-      &-radio {
-        display: flex;
-        align-items: center;
-        flex: 1;
-        &-circle {
-          box-sizing: border-box;
-          width: 32rpx;
-          height: 32rpx;
-          margin-right: 12rpx;
-
-          border: 2rpx solid #bebebf;
-          border-radius: 50%;
-        }
-        &-text {
-          font-size: 30rpx;
-
-          color: #666;
-        }
-      }
+      color: #202020;
     }
   }
 }
-.in-circle {
-  position: relative;
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  border: 2rpx solid #fe7115;
-  &::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  margin: 20rpx 0;
+  padding: 30rpx;
 
-    width: 12rpx;
-    height: 12rpx;
+  background: #fff;
+  &__img {
+    flex-shrink: 0;
 
-    content: "";
-    transform: translate(-50%, -50%);
+    width: 240rpx;
+    height: 160rpx;
 
-    border-radius: 50%;
-    background: #fe7115;
+    border-radius: 10rpx;
+  }
+  &__info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: 160rpx;
+    padding: 0 20rpx;
+    &-title {
+      font-size: 30rpx;
+      font-weight: 600;
+
+      color: #202020;
+    }
+    &-desc {
+      font-size: 26rpx;
+
+      color: #9a9a9a;
+    }
+    &-price {
+      font-size: 30rpx;
+
+      color: #fe7216;
+      &-t {
+        font-size: 22rpx;
+
+        margin-left: -5rpx;
+      }
+    }
   }
 }
-.btn {
-  font-size: 36rpx;
-  line-height: 90rpx;
-
-  width: 630rpx;
-  height: 90rpx;
-
-  color: #fff;
-  border-radius: 45rpx;
-  background: #fe7115;
-
-  &::after {
-    border: none;
-  }
-}
-.placeholder {
-  font-size: 30rpx;
-
-  color: #ccc;
+.arrow {
+  color: #999;
 }
 
 </style>
 
 
+<config>
+{
+  navigationBarTitleText: '提交预定',
+  usingComponents: {
+    loading: '~@/components/loading',
+    default: '~@/components/default',
+    "van-icon": "module:@vant/weapp/dist/icon/index"
+  }
+}
+</config>

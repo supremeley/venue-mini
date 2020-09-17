@@ -51,31 +51,26 @@ wepy.page({
       this.list = [];
       this.isLoading = true;
       this.reset();
-      this.fetchList(this.searchStr);
+      this.fetchList();
     },
   },
   methods: {
     link() {
       this.linkPage('/pages/venue/index');
     },
-    async fetchList(searchStr) {
+    async fetchList() {
       // this.isLoading = true;
-      // let data = {};
-      // if (Object.keys(this.area).length > 1) {
-      //   data = {
-      //     searchStr,
+      // let data = {
+      //     searchStr: this.searchStr,
       //     current: this.current,
       //     size: this.size,
-      //     range: this.value1,
-      //     area: this.area.code,
-      //   };
+      // };
+      // if (Object.keys(this.area).length > 1) {
+      //   data.area= this.area.code
       // } else {
       //   data = {
-      //     searchStr,
+      //     ...data,
       //     ...this.location,
-      //     current: this.current,
-      //     size: this.size,
-      //     range: this.value1,
       //   };
       // }
       // const {
@@ -92,7 +87,7 @@ wepy.page({
       this.isLoading = true;
       this.list = [];
       this.reset();
-      this.fetchList(searchStr);
+      this.fetchList();
     },
   },
   created() {
@@ -156,7 +151,6 @@ page {
   // height: calc(100vh - 102rpx);
   padding: 0 30rpx;
 }
-
 </style>
 
 <config>

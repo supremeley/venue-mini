@@ -22,7 +22,7 @@
         />
       </view>
     </view>
-    <button class="btn">立即下单</button>
+    <button class="btn" @click="link">立即下单</button>
     <!-- <default ></default> -->
   </view>
 </template>
@@ -46,7 +46,7 @@ wepy.page({
   methods: {
     ...mapMutations(['setActiveId']),
     link() {
-      this.linkPage();
+      this.linkPage('/pages/book/index');
     },
     async changeStudent(info) {
       const res = await api.SWITCH_STUDENT(info.id);

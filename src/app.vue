@@ -28,6 +28,9 @@ wepy.app({
 <config>
 {
   pages: [
+    'pages/book/index',
+ 
+    
     
     'pages/home/index',
     'pages/find/index',
@@ -38,7 +41,8 @@ wepy.app({
     'pages/order/detail',
     'pages/venue/index',
     'pages/field/index',
-    
+    'pages/book/success',
+    'pages/book/field',
 
     'pages/login/index',
 
