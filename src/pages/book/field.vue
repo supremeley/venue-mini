@@ -41,7 +41,7 @@ wepy.page({
   },
   methods: {
     link() {
-      this.linkPage('/pages/book/success');
+      this.goBack();
     },
     verify() {
       let msg;

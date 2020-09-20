@@ -1,36 +1,43 @@
 
 <template>
   <view>
-    <view class="section">
-      <view v-for="item in 10" :key="item" class="list-item" @click="linkDetail(item.id)">
-        <view class="list-item-header">
-          <view class="list-item-header__info">
-            <image :src="icon.title" class="list-item-header__info-icon" />
-            <text class="list-item-header__info-text">小鹿人篮球馆</text>
-            <van-icon name="arrow" />
-          </view>
-          <text class="list-item-header__status">已签到</text>
-        </view>
-        <view class="list-item-content">
-          <image :src="icon.bg" class="list-item-content__img" />
-          <view class="list-item-content__info">
-            <view class="list-item-content__info-title">小鹿人1号场</view>
-            <view class="list-item-content__info-date">2018-07-19</view>
-            <view class="list-item-content__info-desc">
-              <text>共计3小时</text>
-              <view class="list-item-content__info-desc__price">
-                <text class="list-item-content__info-desc__price-tag">￥</text>
-                <text class="list-item-content__info-desc__price-num">900.00</text>
+    <van-tabs color="#FE7115" animated sticky>
+      <van-tab v-for="item in titleOption" :key="item.name" :title="item.name">
+        <view class="section">
+          <view v-for="item in 10" :key="item" class="list-item" @click="linkDetail(item.id)">
+            <view class="list-item-header">
+              <view class="list-item-header__info">
+                <image :src="icon.title" class="list-item-header__info-icon" />
+                <text class="list-item-header__info-text">小鹿人篮球馆</text>
+                <van-icon name="arrow" />
+              </view>
+              <text class="list-item-header__status">已签到</text>
+            </view>
+            <view class="list-item-content">
+              <image :src="icon.bg" class="list-item-content__img" />
+              <view class="list-item-content__info">
+                <view class="list-item-content__info-title">小鹿人1号场</view>
+                <view class="list-item-content__info-date">2018-07-19</view>
+                <view class="list-item-content__info-desc">
+                  <text>共计3小时</text>
+                  <view class="list-item-content__info-desc__price">
+                    <text class="list-item-content__info-desc__price-tag">￥</text>
+                    <text class="list-item-content__info-desc__price-num">900.00</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="list-item-bottom">
+              <text class="list-item-bottom__date">2019-05-25 17:30:30</text>
+              <view class="list-item-bottom__box">
+                <view class="list-item-bottom__btn cancel">取消</view>
+                <view class="list-item-bottom__btn">确认</view>
               </view>
             </view>
           </view>
         </view>
-        <view class="list-item-bottom">
-          <text class="list-item-bottom__date">2019-05-25 17:30:30</text>
-          <view class="list-item-bottom__btn">再次预定</view>
-        </view>
-      </view>
-    </view>
+      </van-tab>
+    </van-tabs>
     <loading v-if="isLoading"></loading>
     <default v-if="!isLoading && !list.length"></default>
   </view>
@@ -50,10 +57,24 @@ wepy.page({
       title: '/static/images/title_icon.png',
       bg: '/static/images/bg.png',
     },
+    titleOption: [
+      {
+        name: `全部`,
+        type: 'all',
+      },
+      {
+        name: '待支付',
+        type: 'payment',
+      },
+      {
+        name: '待确认',
+        type: 'confirm',
+      },
+    ],
   },
   methods: {
     linkDetail(id) {
-      this.linkPage(`/pages/order/detail`, { id });
+      this.linkPage(`/pages/manager/book/detail`, { id });
     },
     fetchInfo() {
       this.fetchList();
@@ -107,6 +128,8 @@ wepy.page({
 
     height: 100rpx;
     &__info {
+      line-height: 1;
+
       display: flex;
       align-items: center;
 
@@ -197,17 +220,27 @@ wepy.page({
 
       color: #999;
     }
+    &__box {
+      display: flex;
+      align-items: center;
+    }
     &__btn {
       font-size: 26rpx;
       line-height: 46rpx;
 
-      width: 160rpx;
+      width: 120rpx;
 
       text-align: center;
 
       color: #fe7115;
       border: 2rpx solid #fe7115;
       border-radius: 25rpx;
+    }
+    .cancel {
+      margin-right: 20rpx;
+
+      color: #999;
+      border-color: #999;
     }
   }
 }
@@ -216,11 +249,13 @@ wepy.page({
 
 <config>
 {
-  navigationBarTitleText: '我的预定',
+  navigationBarTitleText: '预定管理',
   usingComponents: {
     loading: '~@/components/loading',
     default: '~@/components/default',
-    "van-icon": "module:@vant/weapp/dist/icon/index"
+    "van-icon": "module:@vant/weapp/dist/icon/index",
+    "van-tab": "module:@vant/weapp/dist/tab/index",
+    "van-tabs": "module:@vant/weapp/dist/tabs/index",
   }
 }
 </config>

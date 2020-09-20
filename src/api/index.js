@@ -1,15 +1,15 @@
 import fetch from './fetch'
 
 const WX_LOGIN = (date, header) =>
-  fetch.main('api_v1/wechat/auth/login', 'POST', date, header)
+  fetch.main('api_b1/wechat/auth/login', 'POST', date, header)
 
-const GET_USERINFO = (date) => fetch.post('api_v1/wechat/auth/info', date)
+const GET_USERINFO = (date) => fetch.post('api_b1/wechat/auth/info', date)
 
-const GET_MOBILE = (date) => fetch.post('api_v1/wechat/auth/phone', date)
+const GET_MOBILE = (date) => fetch.post('api_b1/wechat/auth/phone', date)
 
-const SET_LOCATION = (date) => fetch.get('api_v1/edu/index/district', date)
+const SET_LOCATION = (date) => fetch.get('api_b1/edu/index/district', date)
 
-const GET_VENUE_LIST = (date) => fetch.get('api_v1/edu/venue/list', date)
+// const GET_VENUE_LIST = (date) => fetch.get('api_b1/edu/venue/list', date)
 
 // HOME
 
@@ -159,6 +159,6 @@ export default {
   GET_COURSE_MANAGER_LIST,
   GET_CLASS_MANAGER_LIST,
   GET_STUDENT_MANAGER_LIST_BY_CLASS,
-  UPLOAD_IMG,
-  GET_VENUE_LIST
+  UPLOAD_IMG
+  // GET_VENUE_LIST
 }

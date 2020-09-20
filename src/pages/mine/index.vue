@@ -1,6 +1,6 @@
 
 <template>
-  <view>
+  <view class="wrap">
     <view class="header">
       <image
         :src="memberInfo.headimg || icon.avatar"
@@ -8,7 +8,7 @@
         class="header-avatar"
         @click="openImage"
       />
-      <view class="header-content" @click="linkDetail">
+      <view class="header-content" @click="linkSetting">
         <view class="header-info">{{memberInfo.name || '未登录'}}</view>
         <!-- <view class="header-btn" @click="linkStudent">学员管理</view> -->
         <view class="header-phone">
@@ -54,20 +54,20 @@
         </view>
       </view>
     </view>
-    <!-- <view v-if="coach" class="teacher-list">
+    <view class="more-list">
       <view
         v-for="item in teacherMenu"
         :key="item.title"
-        class="teacher-list-item"
+        class="more-list-item"
         @click="linkPage(item.url)"
       >
-        <image :src="item.icon" class="teacher-list-item__icon" />
-        <view class="teacher-list-item__info">
-          <text class="teacher-list-item__info-text">{{item.title}}</text>
+        <image :src="item.icon" class="more-list-item__icon" />
+        <view class="more-list-item__right">
+          <text class="more-list-item__right-text">{{item.title}}</text>
           <van-icon name="arrow" class="arrow" />
         </view>
       </view>
-    </view>-->
+    </view>
   </view>
 </template>
 
@@ -111,23 +111,23 @@ wepy.page({
     ],
     teacherMenu: [
       {
-        icon: '/static/images/mine_course.png',
-        title: '约课管理',
-        url: '/pages/manager/course/index',
+        icon: '/static/images/mine_book.png',
+        title: '预定管理',
+        url: '/pages/manager/book/index',
       },
       {
-        icon: '/static/images/mine_vacations.png',
-        title: '请假管理',
-        url: '/pages/manager/vacation/index',
+        icon: '/static/images/mine_customer.png',
+        title: '客户管理',
+        url: '/pages/manager/customer/index',
       },
       {
-        icon: '/static/images/mine_classes.png',
-        title: '班级管理',
-        url: '/pages/manager/class/index',
+        icon: '/static/images/mine_venue.png',
+        title: '场馆管理',
+        url: '/pages/manager/venue/index',
       },
       // {
       //   icon: '/static/images/mine_system.png',
-      //   title: '学员管理',
+      //   title: '系统管理',
       //   url: '/pages/manager/student/index',
       // },
     ],
@@ -137,8 +137,8 @@ wepy.page({
   },
   methods: {
     ...mapMutations(['saveStudents', 'setActiveId']),
-    linkDetail() {
-      this.linkPage('/pages/mine/detail');
+    linkSetting() {
+      this.linkPage('/pages/mine/setting');
     },
     openImage() {
       wx.chooseImage({
@@ -221,6 +221,9 @@ wepy.page({
 </script>
 
 <style lang="scss" scoped>
+.wrap {
+  padding-bottom: 20rpx;
+}
 .header {
   position: relative;
 

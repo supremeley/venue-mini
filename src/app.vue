@@ -20,7 +20,7 @@ wepy.mixin(mixins);
 
 wepy.app({
   onLaunch() {
-    // lu.login();
+    lu.login();
   },
 });
 </script>
@@ -28,25 +28,35 @@ wepy.app({
 <config>
 {
   pages: [
-    'pages/book/index',
- 
-    
-    
     'pages/home/index',
     'pages/find/index',
-    'pages/search/index',
     'pages/mine/index',
-    'pages/mine/detail',
+    'pages/search/index',
+    'pages/mine/setting',
     'pages/order/index',
     'pages/order/detail',
+    'pages/order/qrcode',
+    'pages/order/success',
     'pages/venue/index',
     'pages/field/index',
-    'pages/book/success',
+    'pages/book/index',
     'pages/book/field',
-
+    'pages/book/success',
     'pages/login/index',
-
-
+  ],
+  subpackages: [
+    {
+      root: 'pages/manager',
+      pages: [
+        'customer/index',
+        'book/index',
+        'book/detail',
+        'venue/detail',
+        'venue/index',
+        'field/index',
+        'field/detail',
+      ]
+    }
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -66,8 +76,8 @@ wepy.app({
       },
       {
         "pagePath": "pages/find/index",
-        "iconPath": '/static/images/study.png',
-        "selectedIconPath": '/static/images/is_study.png',
+        "iconPath": '/static/images/find.png',
+        "selectedIconPath": '/static/images/is_find.png',
         "text": "场馆"
       },
       {

@@ -39,7 +39,7 @@
         <view>入场时间</view>
       </view>
     </view>
-    <button class="btn">再次预定</button>
+    <button class="btn">确认订单</button>
   </view>
 </template>
 
@@ -241,6 +241,6 @@ wepy.page({
 
 <config>
 {
-  navigationBarTitleText: '订单详情'
+  navigationBarTitleText: '预定详情'
 }
 </config>

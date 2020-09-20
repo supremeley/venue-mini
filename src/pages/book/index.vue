@@ -7,7 +7,7 @@
         <text class="header__info-text">小鹿人篮球馆</text>
       </view>
     </view>
-    <view class="section">
+    <view class="section" @click="link">
       <image :src="icon.bg" mode="aspectFill" class="section__img" />
       <view class="section__info">
         <view class="section__info-title">小鹿人一号场地</view>
@@ -18,6 +18,44 @@
         </view>
       </view>
       <van-icon name="arrow" class="arrow"></van-icon>
+    </view>
+    <view class="content">
+      <view class="content-header">
+        <text class="content-header__title">选择时间</text>
+        <view class="content-header__opt">
+          <text>共计:3小时</text>
+          <van-icon name="arrow" class="arrow"></van-icon>
+        </view>
+      </view>
+      <view class="content-info">
+        <text>2020-06-27 13:00-14:00</text>
+      </view>
+    </view>
+    <view class="content">
+      <view class="content-header">
+        <text class="content-header__title">选择时间</text>
+        <view class="content-header__opt">
+          <input type="number" placeholder="请输入您的联系电话" placeholder-class="placeholder" />
+        </view>
+      </view>
+    </view>
+    <view class="content">
+      <view class="content-header">
+        <text class="content-header__title">备注信息</text>
+      </view>
+      <view class="content-info">
+        <textarea type="textarea" placeholder="请输入您的备注信息" placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class="footer">
+      <view class="footer-content">
+        <view class="footer-content__text">合计:</view>
+        <view class="footer-content__price">
+          <text class="footer-content__price-tag">￥</text>
+          <text class="footer-content__price-num">900</text>
+        </view>
+      </view>
+      <button class="footer-btn" @click="submit">立即支付</button>
     </view>
   </view>
 </template>
@@ -35,6 +73,9 @@ wepy.page({
     },
   },
   methods: {
+    link() {
+      this.linkPage('/pages/book/field');
+    },
     verify() {
       let msg;
       if (!this.form.smsCode) msg = '请填写验证码';
@@ -49,6 +90,8 @@ wepy.page({
       }
     },
     async submit() {
+      this.linkPage('/pages/book/success');
+
       if (!this.verify()) return;
 
       const data = {
@@ -73,6 +116,9 @@ wepy.page({
 </script>
 
 <style lang="scss" scoped>
+.wrap {
+  padding-bottom: 120rpx;
+}
 .header {
   display: flex;
   align-items: center;
@@ -148,6 +194,106 @@ wepy.page({
       }
     }
   }
+}
+
+.content {
+  margin: 20rpx 0;
+  padding: 0 30rpx;
+
+  background: #fff;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 90rpx;
+    &__title {
+      font-size: 34rpx;
+      font-weight: 600;
+
+      color: #202020;
+    }
+    &__opt {
+      font-size: 30rpx;
+      line-height: 1;
+
+      display: flex;
+      align-items: center;
+
+      color: #999;
+    }
+  }
+  &-info {
+    font-size: 30rpx;
+
+    padding: 30rpx;
+
+    color: #666;
+    border-top: 2rpx solid #efefef;
+  }
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 90rpx;
+
+  transform: translate(-50%);
+
+  background: #fff;
+  &-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+
+    padding: 0 30rpx;
+    &__text {
+      font-size: 30rpx;
+
+      color: #202020;
+    }
+    &__price {
+      display: flex;
+      align-items: baseline;
+
+      color: #f92828;
+      &-tag {
+        font-size: 26rpx;
+        line-height: 1;
+      }
+      &-num {
+        font-size: 36rpx;
+        line-height: 1;
+      }
+    }
+  }
+  &-btn {
+    font-size: 36rpx;
+    line-height: 90rpx;
+
+    flex-basis: 240rpx;
+
+    height: 90rpx;
+
+    color: #fff;
+    border-radius: 0;
+    background: #fe7115;
+    &::after {
+      border: none;
+    }
+  }
+}
+.placeholder {
+  font-size: 30rpx;
+
+  color: #ccc;
 }
 .arrow {
   color: #999;
