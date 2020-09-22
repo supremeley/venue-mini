@@ -1,34 +1,22 @@
 <template>
   <view>
-    <view class="title">
-      <view class="title-item">
-        <view class="title-item__circle cancel"></view>
-        <text class="title-item__text">已消:</text>
-        <text class="title-item__num">{{cancelNum}}</text>
+    <scroll-view :scroll-into-view="'a'" scroll-x scroll-with-animation enable-flex class="title">
+      <view v-for="item in 20" :key="item" class="title-item">
+        <view class="title-item__head">今天</view>
+        <view class="title-item__date">7月20日</view>
       </view>
-      <view class="title-item">
-        <view class="title-item__circle"></view>
-        <text class="title-item__text">请假:</text>
-        <text class="title-item__num">{{jiaNum}}</text>
-      </view>
-      <view class="title-item">
-        <view class="title-item__circle can"></view>
-        <text class="title-item__text">剩余:</text>
-        <text class="title-item__num">{{canNum}}</text>
-      </view>
-    </view>
-    <calendar type="show" :info="list"></calendar>
+    </scroll-view>
   </view>
 </template>
 
 <script>
 import wepy from '@wepy/core';
 import api from '@/api/index';
-import store from '@/store';
-import { mapState } from '@wepy/x';
+// import store from '@/store';
+// import { mapState } from '@wepy/x';
 
 wepy.page({
-  store,
+  // store,
   data: {
     canNum: 0,
     jiaNum: 0,
@@ -36,7 +24,7 @@ wepy.page({
     list: [],
   },
   computed: {
-    ...mapState(['calendar']),
+    // ...mapState(['calendar']),
   },
   watch: {},
   methods: {
@@ -56,36 +44,33 @@ wepy.page({
   onLoad(opt) {},
   onShow() {
     // this.init();
-    this.list = this.calendar.map((item) => {
-      return {
-        ...item,
-        type: this.typeHandle(item.statusText),
-        startTime: item.recordTime,
-      };
-    });
-
-    let canNum = 0,
-      jiaNum = 0,
-      cancelNum = 0;
-          // console.log(this.list)
-
-    this.list.forEach((item) => {
-      switch (item.type) {
-        case 'cancel':
-          cancelNum++;
-          break;
-        case 'jia':
-          jiaNum++;
-          break;
-        case 'can':
-          canNum++;
-          break;
-      }
-    });
-
-    this.canNum = canNum;
-    this.jiaNum = jiaNum;
-    this.cancelNum = cancelNum;
+    // this.list = this.calendar.map((item) => {
+    //   return {
+    //     ...item,
+    //     type: this.typeHandle(item.statusText),
+    //     startTime: item.recordTime,
+    //   };
+    // });
+    // let canNum = 0,
+    //   jiaNum = 0,
+    //   cancelNum = 0;
+    // // console.log(this.list)
+    // this.list.forEach((item) => {
+    //   switch (item.type) {
+    //     case 'cancel':
+    //       cancelNum++;
+    //       break;
+    //     case 'jia':
+    //       jiaNum++;
+    //       break;
+    //     case 'can':
+    //       canNum++;
+    //       break;
+    //   }
+    // });
+    // this.canNum = canNum;
+    // this.jiaNum = jiaNum;
+    // this.cancelNum = cancelNum;
   },
 });
 </script>
@@ -97,28 +82,25 @@ page {
 .title {
   display: flex;
   align-items: center;
-  justify-content: space-around;
 
-  height: 140rpx;
+  height: 120rpx;
+
+  text-align: center;
+
+  color: #202020;
+  border-bottom: 2rpx solid #efefef;
+
   &-item {
-    font-size: 26rpx;
-
-    display: flex;
-    align-items: center;
-
-    color: #666;
-    &__circle {
-      width: 24rpx;
-      height: 24rpx;
-      margin-right: 10rpx;
-
-      border-radius: 50%;
-      background: #fe7115;
+    flex-basis: 160rpx;
+    flex-shrink: 0;
+    &__head {
+      font-size: 28rpx;
+      font-weight: 600;
+      line-height: 40rpx;
     }
-    &__num {
-      margin-left: 10rpx;
-
-      color: #fe7115;
+    &__date {
+      font-size: 24rpx;
+      line-height: 32rpx;
     }
   }
 }
@@ -186,7 +168,7 @@ page {
 
 <config>
 {
-  navigationBarTitleText: '课程日历',
+  navigationBarTitleText: '提交预定',
   usingComponents: {
     calendar: '~@/components/calendar',
   }

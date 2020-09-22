@@ -28,6 +28,8 @@ wepy.app({
 <config>
 {
   pages: [
+    'pages/book/detail',
+    
     'pages/home/index',
     'pages/find/index',
     'pages/mine/index',
