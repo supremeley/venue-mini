@@ -1,9 +1,36 @@
 <template>
   <view>
-    <scroll-view :scroll-into-view="'a'" scroll-x scroll-with-animation enable-flex class="title">
+    <scroll-view
+      :scroll-into-view="'a'"
+      scroll-x
+      scroll-with-animation
+      enable-flex
+      class="title"
+    >
       <view v-for="item in 20" :key="item" class="title-item">
         <view class="title-item__head">今天</view>
         <view class="title-item__date">7月20日</view>
+      </view>
+    </scroll-view>
+    <scroll-view scroll-x scroll-y class="content">
+      <view class="content-body">
+        <view class="content-title">
+          <view class="content-title__zh"></view>
+          <view v-for="item in 6" :key="item" class="content-title__item">
+            一号场
+          </view>
+        </view>
+        <view v-for="item in 12" :key="item" class="content-body__item">
+          <text class="content-body__item-title">09:00-</text>
+          <view class="content-body__item-inner">
+            <view
+              v-for="item in 6"
+              :key="item"
+              class="content-body__item-inner__i"
+              >$300</view
+            >
+          </view>
+        </view>
       </view>
     </scroll-view>
   </view>
@@ -104,53 +131,75 @@ page {
     }
   }
 }
-// .date {
-//   text-align: center;
-//   &-header {
-//     font-size: 32rpx;
-//     font-weight: 600;
-//     line-height: 64rpx;
-//   }
-//   &-content {
-//     font-size: 26rpx;
+.content {
+  // padding: 30rpx 0;
 
-//     color: #666;
-//     &__title {
-//       display: flex;
-//       align-items: center;
-//       justify-content: space-evenly;
+  height: 300rpx;
+    position: relative;
+  &-title {
+    height: 100rpx;
+    display: flex;
+position: sticky;
+top: 0;
+line-height: 100rpx;
+    align-items: stretch;
+    // padding-left: 120rpx;
+    margin-bottom: 10rpx ;
+    &__zh {
+      flex-basis: 120rpx;
+      flex-shrink: 0;
+    background: #fff;
+position: relative;
+z-index: 1;
+    }
+    &__item {
+      flex-basis: 118rpx;
+      padding: 0 2rpx;
+      text-align: center;
+    background: #fff;
 
-//       &-item {
-//         line-height: 60rpx;
+      font-size: 28rpx;
+      flex-shrink: 0;
+      color: #666;
+    }
+  }
+  &-body {
+    &__item {
+      display: flex;
+      align-items: stretch;
+      height: 60rpx;
 
-//         flex-basis: calc(100% / 7);
-//       }
-//     }
-//     &__body {
-//       display: flex;
-//       align-items: center;
-//       flex-wrap: wrap;
-//       justify-content: space-evenly;
-
-//       color: #9a9a9a;
-
-//       &-item {
-//         line-height: 60rpx;
-
-//         display: flex;
-//         flex-basis: calc(100% / 7);
-//         justify-content: center;
-
-//         text-align: center;
-//         &__text {
-//           width: 60rpx;
-
-//           border-radius: 50%;
-//         }
-//       }
-//     }
-//   }
-// }
+      &-title {
+        flex-basis: 120rpx;
+        font-size: 28rpx;
+        text-align: right;
+        flex-shrink: 0;
+        color: #202020;
+        transform: translateY(calc(-50% - 2px));
+    background: #fff;
+        line-height: 60rpx;
+      padding-bottom: 4rpx;
+position: sticky;
+left:0;
+      }
+      &-inner {
+        display: flex;
+        flex: 1;
+        &__i {
+          flex-basis: 120rpx;
+          flex-shrink: 0;
+          color: #fff;
+          background: #1ad1a0;
+          border-radius: 4rpx;
+          margin: 0 2rpx 4rpx;
+          text-align: center;
+          line-height: 60rpx;
+          font-size: 28rpx;
+        }
+      }
+    }
+  }
+}
 .cancel {
   color: #fff;
   background: #aaa;
@@ -163,14 +212,10 @@ page {
   color: #fff;
   background: #ff6c17;
 }
-
 </style>
 
 <config>
 {
-  navigationBarTitleText: '提交预定',
-  usingComponents: {
-    calendar: '~@/components/calendar',
-  }
+  navigationBarTitleText: '提交预定'
 }
 </config>
